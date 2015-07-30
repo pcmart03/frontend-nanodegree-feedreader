@@ -63,7 +63,10 @@ $(function() {
       it ('should be hidden by default', function() {
         expect(body.hasClass("menu-hidden")).toBe(true);
       });
-
+      /* A test that triggers the click function on the menu icon link to
+       * to make sure that clicking the link shows and hides the menu by toggling
+        * "menu-hidden" class on the body
+      */
       it ("should show the menu visibility changes when the menu icon is clicked", function() {
         $('.menu-icon-link').trigger('click');
         expect(body.hasClass("menu-hidden")).toBe(false);
@@ -79,7 +82,10 @@ $(function() {
           done();
         });
       });
-
+      /* test that checks to make sure the feed loaded by
+       * checking to make sure that atleast one object with the
+       * entry class was added to the feed container.
+      */
 
         it('after the feeds load, the feed container element contains at least one entry', function(done) {
           var feedCount = $(".feed .entry").length;
@@ -96,6 +102,9 @@ $(function() {
         });
       });
 
+      /* a test that compares the initial contents of the feed container to
+       * the contents of the container after loading a new feed.
+      */
       it('should display new content when a new feed is loaded', function(done) {
         newFeedContent = $('.feed').html;
         expect(newFeedContent).not.toBe(currentFeedContent);
@@ -103,10 +112,6 @@ $(function() {
       })
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+//
 
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
 }());
