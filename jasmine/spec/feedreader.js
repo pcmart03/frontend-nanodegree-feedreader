@@ -32,34 +32,34 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty
          */
-         it("have defined URLs", function(){
-           function test_feed_url(feed){
-             expect(allFeeds[feed].url).toBeDefined();
-             expect(allFeeds[feed].url).not.toBe(" ");
-           };
-        for(i=0; i < allFeeds.length; i++) {
-          test_feed_url(i);
-        }
-         });
+        it("have defined URLs", function(){
+          function test_feed_url(feed){
+            expect(allFeeds[feed].url).toBeDefined();
+            expect(allFeeds[feed].url).not.toBe('');
+          }
+          for(i=0; i < allFeeds.length; i++) {
+            test_feed_url(i);
+          }
+        });
 
         /* Test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-         it("have defined names", function(){
-           function test_feed_name(feed){
-             expect(allFeeds[feed].name).toBeDefined();
-             expect(allFeeds[feed].name).not.toBe(" ");
-           };
+        it("have defined names", function(){
+          function test_feed_name(feed){
+            expect(allFeeds[feed].name).toBeDefined();
+            expect(allFeeds[feed].name).not.toBe('');
+           }
         for(i=0; i < allFeeds.length; i++) {
-          test_feed_name(i);
+           test_feed_name(i);
         }
-         });
+      });
     });
 
     describe ('The menu', function() {
       var spyEvent;
-      var body = $('body')
+      var body = $('body');
       it ('should be hidden by default', function() {
         expect(body.hasClass("menu-hidden")).toBe(true);
       });
@@ -78,27 +78,28 @@ $(function() {
 
     describe('Initial Entries', function() {
       beforeEach(function(done) {
-        loadFeed(0, function() {
-          done();
-        });
+        loadFeed(0, done);
       });
       /* test that checks to make sure the feed loaded by
        * checking to make sure that atleast one object with the
        * entry class was added to the feed container.
       */
 
-        it('after the feeds load, the feed container element contains at least one entry', function(done) {
+        it('after the feeds load, the feed container element contains at least one entry', function() {
           var feedCount = $(".feed .entry").length;
           expect(feedCount).toBeGreaterThan(0);
-          done();
         });
     });
 
     describe('New Feed Selection', function() {
+      var firstFeed;
+      var secondFeed;
       beforeEach(function(done) {
-        currentFeedContent = $('.feed').html()
         loadFeed(1, function() {
-          done();
+          firstFeed = $('.feed').html();
+          loadFeed(2, function() {
+            done();
+          });
         });
       });
 
@@ -106,10 +107,12 @@ $(function() {
        * the contents of the container after loading a new feed.
       */
       it('should display new content when a new feed is loaded', function(done) {
-        newFeedContent = $('.feed').html;
-        expect(newFeedContent).not.toBe(currentFeedContent);
+        expect(firstFeed).toBeDefined();
+        secondFeed = $('.feed').html();
+        expect(secondFeed).toBeDefined();
+        expect(firstFeed).not.toEqual(secondFeed);
         done();
-      })
+      });
     });
 
 //
