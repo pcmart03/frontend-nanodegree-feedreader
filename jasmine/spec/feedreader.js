@@ -22,37 +22,37 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
-        it('are defined', function() {
-            expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
-        });
+      it('are defined', function() {
+        expect(allFeeds).toBeDefined();
+        expect(allFeeds.length).not.toBe(0);
+      });
 
 
-        /* Tests that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty
-         */
-        it("have defined URLs", function(){
-          function test_feed_url(feed){
-            expect(allFeeds[feed].url).toBeDefined();
-            expect(allFeeds[feed].url).not.toBe('');
-          }
-          for(i=0; i < allFeeds.length; i++) {
-            test_feed_url(i);
-          }
-        });
-
-        /* Test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
-         */
-        it("have defined names", function(){
-          function test_feed_name(feed){
-            expect(allFeeds[feed].name).toBeDefined();
-            expect(allFeeds[feed].name).not.toBe('');
-           }
+      /* Tests that loops through each feed
+       * in the allFeeds object and ensures it has a URL defined
+       * and that the URL is not empty
+       */
+      it("have defined URLs", function(){
+        function testFeedUrl(feed){
+          expect(allFeeds[feed].url).toBeDefined();
+          expect(allFeeds[feed].url).not.toBe('');
+        }
         for(i=0; i < allFeeds.length; i++) {
-           test_feed_name(i);
+          testFeedUrl(i);
+        }
+      });
+
+      /* Test that loops through each feed
+       * in the allFeeds object and ensures it has a name defined
+       * and that the name is not empty.
+       */
+      it("have defined names", function(){
+        function testFeedName(feed){
+          expect(allFeeds[feed].name).toBeDefined();
+          expect(allFeeds[feed].name).not.toBe('');
+      }
+        for(i=0; i < allFeeds.length; i++) {
+           testFeedName(i);
         }
       });
     });
@@ -85,10 +85,10 @@ $(function() {
        * entry class was added to the feed container.
       */
 
-        it('after the feeds load, the feed container element contains at least one entry', function() {
-          var feedCount = $(".feed .entry").length;
-          expect(feedCount).toBeGreaterThan(0);
-        });
+      it('after the feeds load, the feed container element contains at least one entry', function() {
+        var feedCount = $(".feed .entry").length;
+        expect(feedCount).toBeGreaterThan(0);
+      });
     });
 
     describe('New Feed Selection', function() {
@@ -97,15 +97,13 @@ $(function() {
       beforeEach(function(done) {
         loadFeed(1, function() {
           firstFeed = $('.feed').html();
-          loadFeed(2, function() {
-            done();
-          });
+          loadFeed(2, done);
         });
       });
 
       /* a test that compares the initial contents of the feed container to
        * the contents of the container after loading a new feed.
-      */
+       */
       it('should display new content when a new feed is loaded', function(done) {
         expect(firstFeed).toBeDefined();
         secondFeed = $('.feed').html();
@@ -114,7 +112,4 @@ $(function() {
         done();
       });
     });
-
-//
-
 }());
